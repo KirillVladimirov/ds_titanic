@@ -10,3 +10,12 @@ flake8
 python-dotenv>=0.5.1
 pytest
 mypy
+
+jupyter
+jupyter_contrib_nbextensions
+numpy
+pandas
+matplotlib
+seaborn
+sklearn
+pandas_profiling
