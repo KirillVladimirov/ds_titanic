@@ -3,6 +3,7 @@ import click
 import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
+import pandas as pd
 
 
 @click.command()
@@ -14,6 +15,26 @@ def main(input_filepath, output_filepath):
     """
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
+
+
+def missing_data(df):
+    """
+    Create report about missing data in dataframe
+        "Total": missing rows,
+        "Percent" percent missing rows to total count
+    :param df: pd.DataFrame
+    :return: pd.DataFrame(["Total", "Percent"]
+    """
+    total = df.isnull().sum().sort_values(ascending = False)
+    percent = (df.isnull().sum()/df.isnull().count()*100).sort_values(ascending = False)
+    ms = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
+    ms = ms[ms["Percent"] > 0]
+    return ms
+
+
+def create_kaggle_submissions(x_id, y):
+    df_predict = pd.DataFrame({"PassengerId": x_id, "Survived": y})
+    df_predict.to_csv("../data/processed/0_2_otus_submission.csv", sep=",", index=False)
 
 
 if __name__ == '__main__':

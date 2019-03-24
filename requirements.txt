@@ -19,3 +19,5 @@ matplotlib
 seaborn
 sklearn
 pandas_profiling
+xgboost
+plotly
