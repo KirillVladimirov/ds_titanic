@@ -21,3 +21,10 @@ sklearn
 pandas_profiling
 xgboost
 plotly
+
+tweepy
+nltk
+wordcloud
+textblob
+gensim
+spacy
